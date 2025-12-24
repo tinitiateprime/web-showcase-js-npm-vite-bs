@@ -1,18 +1,23 @@
 // File: src/App.jsx
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Contact from "./pages/Contact";
+// IMPORTANT: add .jsx extensions to avoid Netlify/Linux resolution issues
+import Home from "./pages/Home.jsx";
+import About from "./pages/About.jsx";
+import Services from "./pages/Services.jsx";
+import Contact from "./pages/Contact.jsx";
 
-import Profile from "./pages/Profile";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Profile from "./pages/Profile.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 
-import Catalog from "./pages/Catalog";
-import Search from "./pages/Search";
+import Catalog from "./pages/Catalog.jsx";
+import Search from "./pages/Search.jsx";
+
+function NotFound() {
+  return <div style={{ padding: 24 }}>Page not found</div>;
+}
 
 export default function App() {
   return (
@@ -30,7 +35,10 @@ export default function App() {
       <Route path="/catalog" element={<Catalog />} />
       <Route path="/search" element={<Search />} />
 
-      <Route path="*" element={<div style={{ padding: 24 }}>Page not found</div>} />
+      {/* optional redirect */}
+      <Route path="/home" element={<Navigate to="/" replace />} />
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-function Signup() {
+export default function Signup() {
   const S = styles();
   const nav = useNavigate();
 
@@ -33,18 +33,18 @@ function Signup() {
   };
 
   function validate(f) {
-    const e = {};
-    if (!trim(f.name)) e.name = "Please enter your full name.";
-    if (!emailOk(f.email)) e.email = "Enter a valid email address.";
+    const err = {};
+    if (!trim(f.name)) err.name = "Please enter your full name.";
+    if (!emailOk(f.email)) err.email = "Enter a valid email address.";
     const sc = scorePwd(f.password || "");
-    if (sc < 3) e.password = "Password should be 8+ chars with a mix of letters & numbers.";
-    if (trim(f.confirm) !== trim(f.password)) e.confirm = "Passwords do not match.";
-    if (!f.agree) e.agree = "You must accept the Terms & Privacy.";
-    return e;
+    if (sc < 3) err.password = "Password should be 8+ chars with a mix of letters & numbers.";
+    if (trim(f.confirm) !== trim(f.password)) err.confirm = "Passwords do not match.";
+    if (!f.agree) err.agree = "You must accept the Terms & Privacy.";
+    return err;
   }
 
-  function submit(e) {
-    e.preventDefault();
+  function submit(evt) {
+    evt.preventDefault();
     const v = validate(form);
     setErrors(v);
     if (Object.keys(v).length) return;
@@ -196,7 +196,9 @@ function Signup() {
                   onChange={(e) => setForm({ ...form, agree: e.target.checked })}
                 />
                 <span>
-                  I agree to the <a href="#" style={S.link}>Terms</a> and <a href="#" style={S.link}>Privacy</a>.
+                  I agree to the{" "}
+                  <a href="/terms" style={S.link}>Terms</a> and{" "}
+                  <a href="/privacy" style={S.link}>Privacy</a>.
                 </span>
               </label>
               {errors.agree && <div style={{ ...S.err, marginLeft: 8 }}>{errors.agree}</div>}
@@ -232,8 +234,6 @@ function Signup() {
     </div>
   );
 }
-
-export default Signup;
 
 /* ---------------- Styles ---------------- */
 function styles() {
