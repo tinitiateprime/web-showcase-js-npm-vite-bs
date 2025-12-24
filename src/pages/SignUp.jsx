@@ -157,7 +157,7 @@ export default function Signup() {
                     {show.pass ? "Hide" : "Show"}
                   </button>
                 </div>
-                {/* Strength bar */}
+
                 <div style={S.meterWrap} aria-hidden>
                   <div style={{ ...S.meter, width: `${(pwdScore / 5) * 100}%` }} />
                 </div>
@@ -208,7 +208,6 @@ export default function Signup() {
               </div>
             </div>
 
-            {/* Social placeholders */}
             <div style={S.hr}><span style={S.hrText}>or continue with</span></div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               <button type="button" style={S.btnGhost}>Google</button>
@@ -216,7 +215,6 @@ export default function Signup() {
               <button type="button" style={S.btnGhost}>Microsoft</button>
             </div>
 
-            {/* Tips */}
             <ul style={S.tips}>
               <li>Use at least 8 characters.</li>
               <li>Add numbers and symbols to increase strength.</li>
@@ -310,11 +308,28 @@ function styles() {
       flexWrap: "wrap", gap: 10, fontSize: 13,
     },
 
-    // Toast
     toast: {
       position: "fixed", bottom: 18, right: 18, background: "white",
       border: "1px solid #e2e8f0", borderRadius: 12, padding: "8px 10px",
       boxShadow: "0 18px 40px rgba(2,6,23,0.12)", fontWeight: 700, zIndex: 50,
+    },
+
+    // (Optional) if you want HR style back (your earlier code referenced S.hr / S.hrText)
+    hr: {
+      position: "relative",
+      marginTop: 6,
+      paddingTop: 10,
+      borderTop: "1px solid #e2e8f0",
+      display: "flex",
+      justifyContent: "center",
+    },
+    hrText: {
+      marginTop: -20,
+      background: "#fff",
+      padding: "0 10px",
+      color: "#64748b",
+      fontSize: 12,
+      fontWeight: 800,
     },
   };
 }
